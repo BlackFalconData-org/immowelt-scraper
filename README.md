@@ -8,11 +8,11 @@ Extract structured data from [immowelt.de](https://immowelt.de) — immowelt.de 
 
 ## Key features
 
-**Search with filters** — Search by keyword and location. Filter by country, transport, and more.
+**Search with filters** — Search by keyword, location, or direct Immowelt URLs. Supports compact runs, result caps, and browser mode for tougher pages.
 
-**Detail enrichment** — Fetch full job descriptions, salary data for each listing.
+**Detail enrichment** — Fetch expose descriptions, broker details, contact phone numbers, room counts, living area, and price metadata.
 
-**Incremental mode** — Only get new or changed listings since your last run. Content hash per listing — no duplicates, no re-processing.
+**Incremental mode** — Only get new or changed listings since your last run. Content hash per listing means no duplicates and cleaner monitoring workflows.
 
 ---
 
@@ -63,7 +63,11 @@ Monitor listings, track trends, and analyze market dynamics with structured, ded
 
 ## FAQ
 
-<!-- WRITE: 4-6 Q&A pairs relevant to this product -->
+**What kind of properties can it scrape?**
+The actor is built for Immowelt residential listings and works well for apartment and house searches where expose pages contain the richest structured data.
+
+**Can I start from my own search URL?**
+Yes. Use `startUrls` to pass a ready-made Immowelt search URL or a specific expose URL when you want deterministic coverage.
 
 **Is it legal to scrape immowelt.de?**
 Web scraping of publicly available data is generally legal. This actor only accesses publicly visible information. Always check the target site's terms of service for your specific use case.
@@ -71,14 +75,20 @@ Web scraping of publicly available data is generally legal. This actor only acce
 **How does incremental mode work?**
 Each listing gets a content hash. On subsequent runs, only new or changed listings are emitted — saving time, compute, and storage.
 
+**What output fields are included?**
+Core fields include title, location, rooms, area, price, price per square meter, broker/provider data, detail URL, coordinates, and scrape timestamps.
+
+**Is browser mode required?**
+No. The default mode works for standard runs, while browser mode is available for tougher sessions and anti-blocking scenarios.
+
 ---
 
 ## Known limitations
 
-<!-- WRITE: 4-6 honest limitations -->
-
-- <!-- WRITE: limitation 1 -->
-- <!-- WRITE: limitation 2 -->
+- Immowelt changes search and expose layouts periodically, so selector maintenance is occasionally required.
+- Some contact and provider fields are only visible on detail pages, not on the search-result cards.
+- Browser mode is slower and more resource-intensive than standard mode, so it is best reserved for tougher sessions.
+- Pagination and anti-blocking behavior can vary by query, geo, and traffic pattern over time.
 
 ---
 
